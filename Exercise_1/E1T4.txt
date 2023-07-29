@@ -1,0 +1,22 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+Poor practice 1:
+The Web Application instance should be moved into the Private Subnet and load balancer configured to only allow access to required ports.
+If the web application instance requires internet access (ie for OS patching), we should add a NAT Gateway to the public subnet to provision this.
+
+
+Poor practice 2:
+The security groups and Network ALC rules are allowing unrestricted access to all ports from any source.
+They should be changed to restrict allowed traffic to specified ports
+
+
+Other considerations:
+
+Although there is no encryption specified when creating the S3 Buckets, since Jan. 2023 AWS has applied server side encryption by default
+(https://aws.amazon.com/blogs/aws/amazon-s3-encrypts-new-objects-by-default/#:~:text=At%20AWS%2C%20security%20is%20the,specify%20a%20different%20encryption%20option)
+
+It is also evident that the Cloudformation Template creates the S3 buckets without blocking Public Access, thankfully since April 2023, AWS also restricts this as default:
+https://aws.amazon.com/about-aws/whats-new/2022/12/amazon-s3-automatically-enable-block-public-access-disable-access-control-lists-buckets-april-2023/
+
+Versioning the S3 buckets would help reduce the ability for infiltrators to delete or corrput the objects stored within the S3 buckets.
+Client-side encrytion could be used to provide additional security but will make the application code more complex.

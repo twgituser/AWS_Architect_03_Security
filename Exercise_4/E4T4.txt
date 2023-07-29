@@ -1,0 +1,14 @@
+# What additional architectural change can be made to reduce the internet facing attack surface of the web application instance.
+Restrict external access to the Web Application instance to use AWS Session Manager.
+We could also move the instance into Public Subnet and use Bastion host to access and NAT Gateway for external access to the Internet.
+
+# Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
+Although VPC private endpoints would restrict traffic to the AWS network, this won't prevent unauthorised access to the secrets S3 bucket if the IAM permissions remain insecure.
+
+# Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
+No, the files would not be encryted if encryption was previously disabled as when you use server-side encryption, Amazon S3 encrypts an object before saving it to disk and decrypts it when you download the object. 
+As of Jan 23, server-side encryption is enabled by AWS as default (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
+
+# What would happen if the original cloud formation templates are applied to this environment.
+We would lose the security hardening we applied directly to AWS. 
+To prevent this, we should update security changes in the CloudFormation template.

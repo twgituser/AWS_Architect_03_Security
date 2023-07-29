@@ -1,0 +1,10 @@
+# Describe GuardDuty findings that were detected related to the brute force attack
+Due to a known issue with Guard Duty, no findings were shown on the Guard Duty dashbord.
+https://knowledge.udacity.com/questions/987733
+
+It should have shown findings that identified the EC2 attacking instance was performing SSH brute force attacks and the Web Application instance was a target of SSH brute force attack.
+ 
+# Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
+AWS Guard Duty can monitor CloudTrail, DNS logs and VPC Flow Logs (https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html)
+SSH Brute force attacks would be identified via the VPC Flow Logs.
+

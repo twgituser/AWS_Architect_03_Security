@@ -1,0 +1,28 @@
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+
+Security Groups:
+WebAppSG allows all internet traffic to access all ports. 
+This is identified as an issue with CRITICAL level severity in security hub which states:
+Security groups should not allow unrestricted access to ports with high risk
+
+Finding ID: arn:aws:securityhub:us-east-1:398180068381:security-control/EC2.19/finding/0226f0dc-14c5-4f03-9b5d-d006988c310f
+Severity = CRITICAL
+This control checks whether unrestricted incoming traffic for the security groups is accessible to the specified ports [3389, 20, 23, 110, 143, 3306, 8080, 1433, 9200, 9300, 25, 445, 135, 21, 1434, 4333, 5432, 5500, 5601, 22, 3000, 5000, 8088, 8888] that have the highest risk. 
+This control fails if any of the rules in a security group allow ingress traffic from 0.0.0.0/0 or ::/0 for those ports.
+
+Within Security Hub, it also details specific port vulnerabilities for security groups on PORT 22 and 3389 as HIGH severity.
+
+
+EC2 Instances:
+These are non-compliant as they are configured to support password authentication over SSH. 
+Security Manager states:
+Password authentication is susceptible to brute-force attacks and should be disabled in favor of key-based authentication where possible.
+
+
+S3 Buckets:
+Although we didn't enable server-side encryption or block public access to the newly created S3 Buckets, 
+AWS changed their policies and now enforce both by default since Jan 23 (encryption) and Apr 23 (Block public access), see below for more information:
+
+https://aws.amazon.com/blogs/aws/amazon-s3-encrypts-new-objects-by-default/#:~:text=At%20AWS%2C%20security%20is%20the,specify%20a%20different%20encryption%20option
+https://aws.amazon.com/about-aws/whats-new/2022/12/amazon-s3-automatically-enable-block-public-access-disable-access-control-lists-buckets-april-2023/
+

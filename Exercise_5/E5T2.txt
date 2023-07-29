@@ -1,0 +1,51 @@
+# Identify tools that will allow you to do the following:
+
+## Scan infrastructure as code templates
+
+Checkov:
+Checkov is a popular static code analyer that checks for misconfigurations in IaC templates such as Terraform, CloudFormation and Kubernetes.
+Users can leverage the many built-in policies that cover best practice for compliance and security for the major clousd provides.
+User can also add custom rules to cater for specific compliance rules.
+
+CloudSploit:
+Scans Cloudformation templates to mitigate security risks.
+It can scan over 95 security vulnerabilities covering a wide range of AWS products.
+It can detect risks efficiently and implement security features before launching your cloud infrastructure.
+
+### Example vulnerability
+Checkov:
+Check: "S3 Bucket has an ACL defined which allows public access."
+ FAILED for resource: aws_s3_bucket.my-s3-bucket
+ File: /mytemplate.tf:10-50
+
+
+##Scan AMI’s or containers for OS vulnerabilities
+
+Anchore:
+Anchore is an open source engine that analyses Docker images to check for vulnerabilities.
+It provides a deep and detailed inspection of container images and OS packages.
+
+Clair
+Clair is also open source project that can be used can as a static code analyser for images as well as providing the ability to monitor containers continuously to check for vulnerabilities.
+
+
+### Example vulnerability
+
+Clair:
+ubuntu:focal found libsystemd0 245.4-4ubuntu3.2       CVE-2018-20839
+
+
+##Scan an AWS environment for cloud configuration vulnerabilities
+
+AWS Config:
+AWS Config is an AWS service that continually assesses, audits, and evaluates the configurations of your AWS resources.
+It provides many rules out of the box which are based on standard security recommendations as well as the ability to add your own rules.
+
+AWS Inspector:
+AWS Inspector is an AWS service that scans EC2 instances, container images and serverless functions for vulnerabilities and insecure network exposure.
+
+
+### Example vulnerability
+
+Security Group allows RDP access from 0.0.0.0/0 to vulnerable ports.
+Root account does not have MFA enabled.

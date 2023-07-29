@@ -1,0 +1,9 @@
+# Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+
+1. Restrict access to Port 22 on the Web Application EC2 instance, currently this is open to all network traffic.
+2. Remove Password login on the Web Application EC2 instance.
+
+# Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
+
+1. Update IAM policy attached to the instance to only allow read access to the 'free recipes' S3 bukcet.
+2. We could also enable client-side encryption when writing to the S3 bucket.
